@@ -26,6 +26,75 @@
 
     <!-- Your stylesheet must load after Mapbox -->
     <link rel="stylesheet" href="style.css?v=16">
+
+    <!-- Homepage layout is included here so only index.html needs replacing. -->
+    <style>
+        html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+        body { margin: 0; background: #080808; color: #f4f4f1; font-family: Arial, Helvetica, sans-serif; }
+        .landing-header, main.database-shell { width: min(1440px, calc(100% - 96px)); margin-inline: auto; box-sizing: border-box; }
+        .landing-header { display: flex; justify-content: space-between; align-items: center; gap: 32px; padding: 28px 0; border-bottom: 1px solid #454545; }
+        .landing-brand { color: #f4f4f1; font-size: 34px; font-weight: 700; letter-spacing: -1.5px; text-decoration: none; }
+        .landing-header nav { display: flex; gap: 32px; flex-wrap: wrap; }
+        .landing-header nav a { color: #f4f4f1; text-decoration: none; font: 12px/1.5 monospace; letter-spacing: 1px; }
+        .landing-header a:hover, .landing-research-link:hover { color: #bdbdb8; }
+        .landing-hero { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: 48px; padding: 64px 0; }
+        .landing-eyebrow { margin: 0 0 20px; font: 12px/1.6 monospace; letter-spacing: 1.5px; color: #b6b6b0; }
+        .landing-hero h1 { margin: 0; max-width: 790px; font-size: clamp(36px, 4.1vw, 64px); line-height: 1.02; font-weight: 600; letter-spacing: -2px; color: #f4f4f1; }
+        .landing-description { max-width: 610px; margin: 24px 0 28px; font-size: 18px; line-height: 1.6; color: #d4d4cf; }
+        .landing-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .landing-button { display: inline-flex; align-items: center; justify-content: center; gap: 14px; padding: 16px 18px; border: 1px solid #b6b6b0; color: #f4f4f1; text-decoration: none; font: 11px/1.4 monospace; letter-spacing: .4px; }
+        .landing-button-primary { background: #f4f4f1; color: #080808; border-color: #f4f4f1; font-weight: 700; }
+        .landing-button:hover { background: #d6d6d1; color: #080808; }
+        .landing-header a:focus-visible, .landing-button:focus-visible, .landing-research-link:focus-visible { outline: 2px solid #f4f4f1; outline-offset: 5px; }
+        .landing-map-preview { min-width: 0; }
+        .landing-map-preview .primary-map-section { margin: 0; width: 100%; border: 1px solid #454545; box-sizing: border-box; }
+        .landing-map-preview .section-toolbar { padding: 18px; gap: 12px; flex-wrap: wrap; }
+        .landing-map-preview .section-kicker { font: 10px/1.5 monospace; letter-spacing: 1px; }
+        .landing-map-preview h2 { font-size: 16px; }
+        .landing-map-preview .map-frame { height: 400px; min-height: 0; position: relative; }
+        .landing-map-preview #map { width: 100%; height: 100%; min-height: 0; position: absolute; inset: 0; }
+        .landing-map-preview .map-location-label { font-size: 9px; max-width: calc(100% - 32px); }
+        .landing-map-preview .map-lower-bar { padding: 14px 18px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; }
+        .landing-map-preview .map-lower-bar p { margin: 0; }
+        .landing-map-preview .map-lower-bar a { color: #f4f4f1; }
+        .landing-about { border-top: 1px solid #555; padding: 48px 0; }
+        .landing-about-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        .landing-about h2 { margin: 0 0 24px; font-size: 34px; line-height: 1.1; font-weight: 600; letter-spacing: -1px; }
+        .landing-about-statement { font-size: clamp(36px, 4.2vw, 60px); line-height: 1.06; letter-spacing: -1.8px; max-width: 540px; margin: 0; font-weight: 600; }
+        .landing-about-copy p { margin: 0 0 22px; font-size: 18px; line-height: 1.6; color: #d4d4cf; }
+        .landing-pillars { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 44px; padding: 28px 0; border-block: 1px solid #555; }
+        .landing-pillars article { padding: 0 30px; border-left: 1px solid #555; }
+        .landing-pillars article:first-child { border-left: 0; padding-left: 0; }
+        .landing-pillars article:last-child { padding-right: 0; }
+        .landing-pillars h3 { margin: 12px 0 16px; font-size: 26px; font-weight: 600; letter-spacing: -.7px; }
+        .landing-pillars p { font-size: 16px; line-height: 1.6; color: #d4d4cf; margin: 0; }
+        .landing-research-link { display: inline-block; margin-top: 28px; color: #f4f4f1; text-underline-offset: 6px; font: 11px/1.6 monospace; letter-spacing: .8px; }
+        #advanced-search, #about-deadlining, #interactive-map { scroll-margin-top: 24px; }
+        @media (max-width: 1000px) {
+            .landing-hero { gap: 28px; grid-template-columns: 1fr 1fr; }
+            .landing-hero h1 { font-size: 40px; }
+            .landing-header nav { gap: 18px; }
+            .landing-about-intro { gap: 36px; }
+        }
+        @media (max-width: 720px) {
+            .landing-header, main.database-shell { width: calc(100% - 40px); }
+            .landing-header { align-items: flex-start; flex-direction: column; gap: 20px; padding-block: 22px; }
+            .landing-brand { font-size: 30px; }
+            .landing-header nav { gap: 20px; }
+            .landing-hero { grid-template-columns: 1fr; padding: 36px 0; gap: 32px; }
+            .landing-hero h1 { font-size: clamp(34px, 8vw, 50px); letter-spacing: -1.3px; }
+            .landing-description, .landing-about-copy p { font-size: 16px; }
+            .landing-map-preview .map-frame { height: 320px; }
+            .landing-about { padding-block: 32px; }
+            .landing-about-intro, .landing-pillars { grid-template-columns: 1fr; gap: 28px; }
+            .landing-about-statement { font-size: 42px; }
+            .landing-pillars { gap: 0; margin-top: 32px; padding: 0; }
+            .landing-pillars article, .landing-pillars article:first-child, .landing-pillars article:last-child { border-left: 0; padding: 24px 0; }
+            .landing-pillars article + article { border-top: 1px solid #454545; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+
 </head>
 
 <body>
@@ -33,18 +102,14 @@
          HEADER IMAGE
     ========================================== -->
 
-    <header class="site-header">
-
-        <a href="index.html" aria-label="Return to homepage">
-
-        <img
-    src="assets/header.png?v=3"
-    alt="MMBDB header"
-    class="header-image"
->
-
-        </a>
-
+    <header class="landing-header">
+        <a class="landing-brand" href="index.html">DEADLINING</a>
+        <nav aria-label="Primary navigation">
+            <a href="#about-deadlining">ABOUT</a>
+            <a href="#advanced-search">DATABASE</a>
+            <a href="research.html">RESEARCH</a>
+            <a href="contact.html">CONTACT</a>
+        </nav>
     </header>
 
 
@@ -57,242 +122,17 @@
          DATABASE INTRODUCTION
     ========================================== -->
 
-    <section class="database-hero">
-
-        <div class="hero-copy">
-
-            <p class="system-label">
-                PUBLIC FORENSIC DATABASE / WASHINGTON, D.C.
-            </p>
-
-            <h1>
-                WASHINGTON D.C. DATABASE FOR MISSING AND MURDERED BLACK WOMEN
-            </h1>
-
-            <p class="hero-description">
-                A public case database and spatial research platform documenting
-                missing and murdered Black women and girls in Washington, D.C.
-            </p>
-
+    <section class="landing-hero" aria-labelledby="homepage-title">
+        <div class="landing-hero-copy">
+            <p class="landing-eyebrow">PUBLIC CASE DATABASE / WASHINGTON, D.C.</p>
+            <h1 id="homepage-title">WASHINGTON D.C. DATABASE FOR MISSING AND MURDERED BLACK WOMEN</h1>
+            <p class="landing-description">A public case database and spatial research platform documenting missing and murdered Black women and girls in Washington, D.C.</p>
+            <div class="landing-actions">
+                <a class="landing-button landing-button-primary" href="map.html">EXPLORE THE INTERACTIVE MAP <span aria-hidden="true">↗</span></a>
+                <a class="landing-button" href="#advanced-search">SEARCH THE DATABASE</a>
+            </div>
         </div>
-
-        <div class="database-status">
-
-            <span class="status-dot"></span>
-
-            <div>
-                <p>DATABASE STATUS</p>
-                <strong>PUBLIC ACCESS</strong>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- =========================================
-     CURRENT MISSING PERSONS BULLETIN
-========================================== -->
-
-<section
-    class="missing-bulletin"
-    aria-labelledby="missing-bulletin-title"
->
-
-    <div class="bulletin-topbar">
-        <div class="bulletin-status">
-            <span class="bulletin-status-dot"></span>
-            ACTIVE COMMUNITY BULLETIN
-        </div>
-
-        <p>WASHINGTON, D.C. / JULY–AUGUST 2026</p>
-    </div>
-
-    <div class="bulletin-header">
-
-        <p class="bulletin-eyebrow">
-            MISSING BLACK WOMEN AND GIRLS
-        </p>
-
-        <h2 id="missing-bulletin-title">
-            HAVE YOU<br>SEEN ME?
-        </h2>
-
-        <div class="bulletin-header-copy">
-
-            <p class="bulletin-introduction">
-                Several Black girls and women have recently been reported
-                missing in Washington, D.C. Their names, images, and cases
-                deserve immediate and sustained public attention.
-            </p>
-
-            <p class="bulletin-question">
-                As our girls continue to go missing, what specific measures
-                is the Metropolitan Police Department taking to identify
-                patterns, alert the public, and protect Black women and girls
-                throughout the District?
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="bulletin-divider">
-        <span>RECENT MISSING-PERSON NOTICES</span>
-        <span>SHARE RESPONSIBLY</span>
-    </div>
-
-    <div class="missing-flyer-grid">
-
-        <article class="missing-flyer-card">
-
-            <div class="flyer-image-wrapper">
-                <span class="flyer-number">01</span>
-
-                <img
-                    src="assets/Amari_Barnes.jpeg"
-                    alt="Missing-person flyer for Amari Barnes"
-                    loading="lazy"
-                >
-            </div>
-
-            <div class="missing-flyer-info">
-                <p class="flyer-status">MISSING</p>
-                <h3>Amari Barnes</h3>
-                <p>Washington, D.C.</p>
-            </div>
-
-        </article>
-
-
-        <article class="missing-flyer-card">
-
-            <div class="flyer-image-wrapper">
-                <span class="flyer-number">02</span>
-
-                <img
-                    src="assets/Shirley_Farley.jpeg"
-                    alt="Missing-person flyer for Shirley Farley"
-                    loading="lazy"
-                >
-            </div>
-
-            <div class="missing-flyer-info">
-                <p class="flyer-status">MISSING</p>
-                <h3>Shirley Farley</h3>
-                <p>Washington, D.C.</p>
-            </div>
-
-        </article>
-
-
-        <article class="missing-flyer-card">
-
-            <div class="flyer-image-wrapper">
-                <span class="flyer-number">03</span>
-
-                <img
-                    src="assets/Tamar_Carter_Williams.jpeg"
-                    alt="Missing-person flyer for Tamar Carter Williams"
-                    loading="lazy"
-                >
-            </div>
-
-            <div class="missing-flyer-info">
-                <p class="flyer-status">MISSING</p>
-                <h3>Tamar Carter Williams</h3>
-                <p>Washington, D.C.</p>
-            </div>
-
-        </article>
-
-
-        <article class="missing-flyer-card">
-
-            <div class="flyer-image-wrapper">
-                <span class="flyer-number">04</span>
-
-                <img
-                    src="assets/Trinity_Ross.jpeg"
-                    alt="Missing-person flyer for Trinity Ross"
-                    loading="lazy"
-                >
-            </div>
-
-            <div class="missing-flyer-info">
-                <p class="flyer-status">MISSING</p>
-                <h3>Trinity Ross</h3>
-                <p>Washington, D.C.</p>
-            </div>
-
-        </article>
-
-
-        <article class="missing-flyer-card">
-
-            <div class="flyer-image-wrapper">
-                <span class="flyer-number">05</span>
-
-                <img
-                    src="assets/Tyonna_Sanders.jpeg"
-                    alt="Missing-person flyer for Tyonna Sanders"
-                    loading="lazy"
-                >
-            </div>
-
-            <div class="missing-flyer-info">
-                <p class="flyer-status">MISSING</p>
-                <h3>Tyonna Sanders</h3>
-                <p>Washington, D.C.</p>
-            </div>
-
-        </article>
-
-    </div>
-
-    <div class="bulletin-footer">
-
-        <div>
-            <p class="bulletin-footer-label">
-                HAVE INFORMATION?
-            </p>
-
-            <p>
-                Contact the agency or telephone number listed on the
-                individual’s official flyer. Call 911 in an emergency.
-            </p>
-        </div>
-
-        <p class="bulletin-disclaimer">
-            Case information may change. Confirm current status with the
-            issuing agency before resharing a notice.
-        </p>
-
-    </div>
-
-</section>
-
-    <!-- =========================================
-         NAVIGATION
-    ========================================== -->
-
-    <nav class="database-navigation" aria-label="Primary navigation">
-
-        <a href="index.html" class="active">
-            DATABASE
-        </a>
-
-        <a href="#interactive-map">
-            INTERACTIVE MAP
-        </a>
-
-        </a>
-
-    </nav>
-
-
-    <!-- =========================================
-         MAP FIRST
-    ========================================== -->
+        <div class="landing-map-preview">
 <section
     class="primary-map-section"
     id="interactive-map"
@@ -354,6 +194,28 @@
     </div>
 
 </section>
+        </div>
+    </section>
+
+    <section class="landing-about" id="about-deadlining" aria-labelledby="about-title">
+        <p class="landing-eyebrow">THE RESEARCH INITIATIVE</p>
+        <div class="landing-about-intro">
+            <div>
+                <h2 id="about-title">ABOUT<br>DEADLINING</h2>
+                <p class="landing-about-statement">Making fragmented records visible.</p>
+            </div>
+            <div class="landing-about-copy">
+                <p>Deadlining documents missing and murdered Black women and girls in Washington, D.C., bringing scattered public records into an accessible case database and spatial research platform.</p>
+                <p>The project examines how geography, jurisdiction, reporting, and public memory shape whose stories remain visible.</p>
+            </div>
+        </div>
+        <div class="landing-pillars">
+            <article><span class="landing-eyebrow">01</span><h3>DOCUMENT</h3><p>Preserve and organize case records for missing and murdered Black women and girls in Washington, D.C.</p></article>
+            <article><span class="landing-eyebrow">02</span><h3>CONNECT</h3><p>Bring together fragmented sources, including police reports, news coverage, and public records, into a single, accessible database.</p></article>
+            <article><span class="landing-eyebrow">03</span><h3>EXAMINE</h3><p>Study spatial patterns across the District to understand how geography, jurisdiction, reporting, and public memory shape visibility.</p></article>
+        </div>
+        <a class="landing-research-link" href="about.html">READ ABOUT THE RESEARCH INITIATIVE <span aria-hidden="true">↗</span></a>
+    </section>
 
     <!-- =========================================
          DATABASE STATISTICS
@@ -365,7 +227,7 @@
 
             <span class="stat-index">01</span>
 
-            <p class="stat-value">188</p>
+            <p class="stat-value">180</p>
 
             <p class="stat-label">
                 DOCUMENTED CASES
@@ -520,103 +382,6 @@
 
     </section>
 
-
-    <!-- =========================================
-         ABOUT DEADLINING
-    ========================================== -->
-
-    <section class="about-deadlining">
-
-        <div class="about-heading">
-
-            <p class="section-kicker">
-                RESEARCH INITIATIVE
-            </p>
-
-            <h2>
-                ABOUT DEADLINING
-            </h2>
-
-            <p class="about-lead">
-                Deadlining investigates how missing and murdered Black women
-                become obscured within systems of urban redevelopment,
-                jurisdiction, reporting, and public memory.
-            </p>
-
-        </div>
-
-
-        <div class="about-card-grid">
-
-            <article class="about-card featured-card">
-
-                <span class="card-number">
-                    01
-                </span>
-
-                <p class="card-label">
-                    THE FINDING
-                </p>
-
-                <h3>
-                    Documented cases cluster within liminal zones of urban
-                    redevelopment and jurisdictional invisibility.
-                </h3>
-
-                <div class="card-shape card-circle"></div>
-
-            </article>
-
-
-            <article class="about-card">
-
-                <span class="card-number">
-                    02
-                </span>
-
-                <p class="card-label">
-                    GEOGRAPHY OF INVISIBILITY
-                </p>
-
-                <p>
-                    The highest documented case density occurred along Suitland
-                    Parkway, where redevelopment is transforming a corridor long
-                    shaped by displacement.
-                </p>
-
-                <div class="card-shape card-line"></div>
-
-            </article>
-
-
-            <article class="about-card">
-
-                <span class="card-number">
-                    03
-                </span>
-
-                <p class="card-label">
-                    WHY WE EXIST
-                </p>
-
-                <p>
-                    To close critical gaps in missing and murdered persons data
-                    through an accessible forensic database supporting
-                    investigation, research, and informed public awareness.
-                </p>
-
-                <div class="card-shape card-square"></div>
-
-            </article>
-
-        </div>
-
-
-        <a href="about.html" class="about-link">
-            READ ABOUT THE RESEARCH INITIATIVE →
-        </a>
-
-    </section>
 
 </main>
     
